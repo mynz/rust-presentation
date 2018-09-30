@@ -9,10 +9,31 @@ transition : "default"
 
 ---
 
+### Rustはこんな言語
+
+~~~rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let (s2, len) = calculate_length(s1);
+
+    println!("The length of '{}' is {}.", s2, len);
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len(); // len() returns the length of a String
+
+    (s, length)
+}
+~~~
+
+---
+
 ## システムプログラミング言語？
 
 - 優れた実行効率、少ない資源
 - 彽レイヤ操作可能
+- リソースに対する透明性
 - ネイティブバイナリ
 - GCは許容しない
 
@@ -133,7 +154,33 @@ transition : "default"
 ### 実際使用してみての印象 (4/4)
 
 - Cargo 便利
-  - Batteries included
+  - ビルドシステム、
+  - パッケージマネジャー
+    - 実質: "Batteries included"
+  - ユニットテスト、プロファイリング
 - 処理系が一つなのは何気にありがたい(vs C++)
 - 実質 nightly build が標準
 - 枯れてない言語なので情報が錯綜しがち
+  - Stable版が6週間毎にリリースされる
+
+---
+
+## 特徴的な言語機能
+
+---
+
+## Rustの値
+
+- 値は
+  - 厳格な型
+  - 所有権 or 借用
+  - 可変性（デフォルトでimmutable）
+  - 寿命
+  - トレイト
+
+以上の特徴を持つ
+
+
+
+
+
