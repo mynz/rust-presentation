@@ -195,15 +195,7 @@ Pythonつらい。
 Note:
 TODO: より適切な例
 
----
 
-## 静的・動的ディスパッチ
-
-
-Note:
-
-- Generics vs Trit object
-- Fat pointer
 
 ---
 
@@ -223,11 +215,12 @@ impl<T> [T] {
   fn sort(&mut self) where T: Ord { ... }
 ~~~
 
-
+note:
+C++と比べるとずいぶん便利
 
 --
 
-### 代表的ななTrait
+### 標準で用意されている代表的なTrait
 
 - Debug
 - Copy
@@ -239,8 +232,36 @@ impl<T> [T] {
 - Ord, PartialOrd
 - std::ops::add, ...
 
+---
 
+### ポリモーフィズム
 
+- Traitを用いてポリモーフィズムが実現できる
+  - 静的ディスパッチ -> Generics
+  - 動的ディスパッチ -> Trait Object or Boxing
+- - - 
+静的・動的はC++みたいに関数実装時に"virtual/non-virtual"を選択する必要はなく、呼び出し時に選択できる。
 
+--
 
+### 静的ディスパッチ
+
+- Genericsと聞くとC++は抵抗があるが、Rustのそれは使いやすい
+- Traitで受け入れる型に制約をつけられる
+
+--
+
+### 動的ディスパッチ
+
+- Fat Pointer（オブジェクトとvptr）を呼び出し時に生成
+- オブジェクト自身にvptrを持つC++よりも効率的
+
+Note:
+
+- Generics vs Trite object
+- Fat pointer
+
+---
+
+### 列挙体(enum)
 
