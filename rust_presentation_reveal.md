@@ -50,6 +50,7 @@ fn calculate_length(s: String) -> (String, usize) {
   - Cortex-M、AVRなど
 - 高いパフォーマンスが求められる基板層向け
 - リアルタイム性が高いアクションゲームにも
+  - ゲーム機は実質組み込み系
 
 ---
 
@@ -107,7 +108,7 @@ fn calculate_length(s: String) -> (String, usize) {
 - 最小限のランタイム
 - 効率的なCバインディング
 
-<small>（[公式サイト](https://www.rust-lang.org/ja-JP/index.html)より）</small>
+<small>（[公式サイト](https://www.rust-lang.org/ja-JP/index.html)より）</small>
 
 ---
 
@@ -137,6 +138,9 @@ fn calculate_length(s: String) -> (String, usize) {
   - メモリーリーク、資源解放忘れがない
   - メモリー破壊がない
   - スレッド間のデータ競合がない
+
+Note:
+Pythonつらい。
 
 --
 
@@ -171,14 +175,70 @@ fn calculate_length(s: String) -> (String, usize) {
 
 ## Rustの値
 
-- 値は
+- 値は以下の特徴を持つ
   - 厳格な型
   - 所有権 or 借用
   - 可変性（デフォルトでimmutable）
   - 寿命
   - トレイト
 
-以上の特徴を持つ
+--
+
+### 値の例
+
+  ~~~rust
+  fn get_damaged(mon: mut& Monster, p: u32, k: &Kind) {
+    // ...
+  }
+  ~~~
+
+Note:
+TODO: より適切な例
+
+---
+
+## 静的・動的ディスパッチ
+
+
+Note:
+
+- Generics vs Trit object
+- Fat pointer
+
+---
+
+## Trailt
+
+--
+
+### Trailt
+
+- GoのInterfaceに似ている
+- Traitをつけるとトレイトが要求するメソッドを割り当てる
+- 標準型を含め、任意の型に後からでもつけられる
+- Generic関数の制約に用いることもできる
+
+~~~rust
+impl<T> [T] {
+  fn sort(&mut self) where T: Ord { ... }
+~~~
+
+
+
+--
+
+### 代表的ななTrait
+
+- Debug
+- Copy
+- Clone
+- Drop
+- Default
+- Hash
+- Eq, PartialEq
+- Ord, PartialOrd
+- std::ops::add, ...
+
 
 
 
