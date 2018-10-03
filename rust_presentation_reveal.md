@@ -268,17 +268,39 @@ Note:
 - enumは値を保持できる
 
 ~~~rust
-struct Vec3 {
-  x: f32,
-  y: f32,
-  z: f32,
+enum Shape {
+	Circle(Point, f64),
+	Rectangle(Point, Point)
 }
 
-enum {
-  Sphere(Vec3, f32),		// origin, radius
-  Box(Vec3, Vec3),			// min, max
-  Capsule(Vec3, Vec3, f32),	// edge-a, edge-b, radius
+fn area(sh: Shape) -> f64 {
+    match sh {
+        Shape::Circle(_, size) => PI * size * size,
+        Shape::Rectangle(Point { x, y }, Point { x: x2, y: y2 }) => (x2 - x) * (y - y2)
+    }
 }
 ~~~
 
+--
+
+### エラーハンドリング
+
+- エラーハンドリングにはenumが用いられる
+- Result, Option
+
+~~~rust
+fn read_content(fname: &String) -> io::Result<Vec<u8>> {
+    let mut f = File::open(fname)?;
+    let mut buffer = Vec::new();
+    f.read_to_end(&mut buffer)?;
+    Ok(buffer)
+}
+
+fn main() {
+    match read_content("foo.txt") {
+        Ok(s) => { println!("content size: {}", s.len()) },
+        Err(e) => { println!("error: {}", e) },
+    }
+}
+~~~
 
