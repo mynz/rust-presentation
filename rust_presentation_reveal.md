@@ -40,6 +40,12 @@ fn calculate_length(s: String) -> (String, usize) {
 
 ---
 
+## Rustは速度、安全性、並行性の3つのゴールにフォーカスしたシステムプログラミング言語です。 
+
+（公式サイトより）
+
+---
+
 ## システムプログラミング言語？
 
 - 優れた実行効率、少ない資源
@@ -103,7 +109,7 @@ fn calculate_length(s: String) -> (String, usize) {
 
 ## ようするにC/C++の後継言語がなかった。
 
-# Rustの誕生
+# Rustの爆誕！
 
 ---
 
