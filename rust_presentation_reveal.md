@@ -35,7 +35,7 @@ fn calculate_length(s: String) -> (String, usize) {
 - 彽レイヤ操作可能
 - リソースに対する透明性
 - ネイティブバイナリ
-- GCは許容しない
+- GCを持たない <!-- .element: class="fragment highlight-red" data-fragment-index="1" -->
 
 --
 
@@ -264,4 +264,21 @@ Note:
 ---
 
 ### 列挙体(enum)
+
+- enumは値を保持できる
+
+~~~rust
+struct Vec3 {
+  x: f32,
+  y: f32,
+  z: f32,
+}
+
+enum {
+  Sphere(Vec3, f32),		// origin, radius
+  Box(Vec3, Vec3),			// min, max
+  Capsule(Vec3, Vec3, f32),	// edge-a, edge-b, radius
+}
+~~~
+
 
