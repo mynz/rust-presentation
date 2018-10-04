@@ -20,6 +20,17 @@ transition : "default"
 
 ---
 
+- 森本篤 @ Cyllista
+  - 業務ではC++とPython
+  - Rust歴は2ヶ月ぐらい
+  - 学習用の題材: レイトレ本の C++ -> Rust に移植
+
+<div style="text-align:center;">
+  <img src="book-rt.jpg">
+</div>
+
+---
+
 ### Rustはこんな言語
 
 ~~~rust
@@ -42,17 +53,17 @@ fn calculate_length(s: String) -> (String, usize) {
 
 ## Rustは速度、安全性、並行性の3つのゴールにフォーカスしたシステムプログラミング言語です。 
 
-（公式サイトより）
+<small>（[公式サイト](https://www.rust-lang.org/ja-JP/index.html)より）</small>
 
----
+--
 
 ## システムプログラミング言語？
 
-- 優れた実行効率、少ない資源
+- 優れた実行効率、少ない資源、フットプリント
 - 彽レイヤ操作可能
 - リソースに対する透明性
 - ネイティブバイナリ
-- GCを持たない <!-- .element: class="fragment highlight-red" data-fragment-index="1" -->
+- GCを持たない！ <!-- .element: class="fragment highlight-red" data-fragment-index="1" -->
 
 --
 
@@ -109,7 +120,9 @@ fn calculate_length(s: String) -> (String, usize) {
 
 ## ようするにC/C++の後継言語がなかった。
 
-# Rustの爆誕！
+## 何十年も！
+
+# Rustの爆誕！
 
 ---
 
@@ -179,7 +192,7 @@ Pythonつらい。
   - パッケージマネジャー
     - 実質: "Batteries included"
   - ユニットテスト、プロファイリング
-- 処理系が一つなのは何気にありがたい(vs C++)
+- 処理系が一つなのは何気にありがたい(vs C/C++)
 - 実質 nightly build が標準
 - 枯れてない言語なので情報が錯綜しがち
   - Stable版が6週間毎にリリースされる
@@ -201,30 +214,36 @@ Pythonつらい。
 
 --
 
-### 値の例
+### 所有権の例
 
-  ~~~rust
-  fn get_damaged(mon: mut& Monster, p: u32, k: &Kind) {
-    // ...
-  }
-  ~~~
+~~~rust
+fn say(msg: String) {
+    println!("I wanna say: {}", msg);
+}
+
+fn main() {
+    let m = String::from("hello");
+    say(m);
+    say(m);  // error!
+}
+~~~
 
 Note:
-TODO: より適切な例
-
 
 
 ---
 
-## Trailt
+## Trait
+
+（特徴、特性）
 
 --
 
-### Trailt
+### Trait
 
 - GoのInterfaceに似ている
 - Traitをつけるとトレイトが要求するメソッドを割り当てる
-- 標準型を含め、任意の型に後からでもつけられる
+- 標準型を含め、struct, enumの任意の型に後からでもつけられる
 - Generic関数の制約に用いることもできる
 
 ~~~rust
@@ -256,13 +275,18 @@ C++と比べるとずいぶん便利
 - Traitを用いてポリモーフィズムが実現できる
   - 静的ディスパッチ -> Generics
   - 動的ディスパッチ -> Trait Object or Boxing
+
 - - - 
-静的・動的はC++みたいに関数実装時に"virtual/non-virtual"を選択する必要はなく、呼び出し時に選択できる。
+
+静的・動的はC++みたいに関数実装時に"virtual/non-virtual"を選択する必要はなく、呼び出し時に選択できる。  
+（C++メソッドの定義時に決まってしまう）
 
 --
 
 ### 静的ディスパッチ
 
+- 静的はコンパイル時に呼び出し先が決定する
+  - 動的よりも軽量なので可能であれば静的で
 - Genericsと聞くとC++は抵抗があるが、Rustのそれは使いやすい
 - Traitで受け入れる型に制約をつけられる
 
@@ -270,7 +294,8 @@ C++と比べるとずいぶん便利
 
 ### 動的ディスパッチ
 
-- Fat Pointer（オブジェクトとvptr）を呼び出し時に生成
+- Trait Object、もしくはBoxingを行うことで可能
+- Fat Pointer（オブジェクトとvptrのペア）を呼び出し時に生成
 - オブジェクト自身にvptrを持つC++よりも効率的
 
 Note:
@@ -303,7 +328,8 @@ fn area(sh: Shape) -> f64 {
 ### エラーハンドリング
 
 - エラーハンドリングにはenumが用いられる
-- Result, Option
+- Result(Ok<T>, Err<E>), Option(Some(T), None)
+- '?'文法でif-errorチェックが簡便に書ける
 
 ~~~rust
 fn read_content(fname: &String) -> io::Result<Vec<u8>> {
@@ -321,3 +347,15 @@ fn main() {
 }
 ~~~
 
+---
+
+## まとめ
+
+- やっぱり"難しい系"の言語
+- アマチュアのおもちゃではなく玄人向けツール
+- でも、敷居は下がってきている
+- 既存の手続き型OOP言語の外に出たい人は是非！
+
+---
+
+# end
